@@ -16,7 +16,10 @@ namespace Sound_recorder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form1 frm = new Form1();
+            Forms fo = new Forms(frm);
+            frm.getForms(fo);
+            Application.Run(frm);
         }
     }
 }
