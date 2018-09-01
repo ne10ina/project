@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -62,18 +63,10 @@ namespace Sound_recorder
 
         public void startRec()
         {
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "WAV (*.wav)|*.wav",
-                Title = "Save",
-                FileName = String.Empty
-            };
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                StartCapture(sfd.FileName);
-                fo.frm1.button1.Enabled = false;
-                fo.frm1.button4.Enabled = true;
-            }
+            StartCapture();
+            fo.frm1.button1.Enabled = false;
+            fo.frm1.button4.Enabled = true;
+            
         }
 
         public void refreshDevices()
@@ -99,7 +92,7 @@ namespace Sound_recorder
             }
         }
 
-        private void StartCapture(string fileName)
+        private void StartCapture()
         {
             if (SelectedDevice == null)
                 return;
@@ -113,7 +106,7 @@ namespace Sound_recorder
             var soundInSource = new SoundInSource(_soundIn);
             var singleBlockNotificationStream = new SingleBlockNotificationStream(soundInSource.ToSampleSource());
             _finalSource = singleBlockNotificationStream.ToWaveSource();
-            _writer = new WaveWriter(fileName, _finalSource.WaveFormat);
+            _writer = new WaveWriter("tmp.wav", _finalSource.WaveFormat);
 
             byte[] buffer = new byte[_finalSource.WaveFormat.BytesPerSecond / 2];
             soundInSource.DataAvailable += (s, e) =>
@@ -151,6 +144,9 @@ namespace Sound_recorder
 
                 if (_writer is IDisposable)
                     ((IDisposable)_writer).Dispose();
+
+                FileManager fm = new FileManager();
+                fm.replaceRecord();
 
                 fo.frm1.button4.Enabled = false;
                 fo.frm1.button1.Enabled = true;

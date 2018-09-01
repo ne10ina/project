@@ -34,6 +34,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.deviceList = new System.Windows.Forms.ListView();
+            this.CreateFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -94,11 +95,22 @@
             this.deviceList.UseCompatibleStateImageBehavior = false;
             this.deviceList.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
+            // CreateFolder
+            // 
+            this.CreateFolder.Location = new System.Drawing.Point(12, 98);
+            this.CreateFolder.Name = "CreateFolder";
+            this.CreateFolder.Size = new System.Drawing.Size(75, 23);
+            this.CreateFolder.TabIndex = 9;
+            this.CreateFolder.Text = "Создать";
+            this.CreateFolder.UseVisualStyleBackColor = true;
+            this.CreateFolder.Click += new System.EventHandler(this.CreateFolder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CreateFolder);
             this.Controls.Add(this.deviceList);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -122,6 +134,7 @@
         public System.Windows.Forms.Button button3;
         public System.Windows.Forms.Button button4;
         public System.Windows.Forms.ListView deviceList;
+        private System.Windows.Forms.Button CreateFolder;
     }
 }
 

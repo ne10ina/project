@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -75,6 +76,7 @@ namespace Sound_recorder
         private void button4_Click(object sender, EventArgs e)
         {
             rec.stopRec();
+            //Properties.Settings.Default.Context;
         }
         
 
@@ -94,6 +96,12 @@ namespace Sound_recorder
         {
             rec = new Recorder(fo);
             player = new Player(fo);
+        }
+
+        private void CreateFolder_Click(object sender, EventArgs e)
+        {
+            FileManager fm = new FileManager();
+            fm.init();
         }
     }
 }
